@@ -1,0 +1,5 @@
+The package dpdk is compatible with built-in CMake targets:
+
+    FIND_PACKAGE(dpdk REQUIRED)
+    STRING(TOLOWER ${CMAKE_BUILD_TYPE} build)
+    TARGET_LINK_LIBRARIES(main PRIVATE DPDK::dpdk_${build})
