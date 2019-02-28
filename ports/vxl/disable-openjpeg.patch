@@ -1,0 +1,28 @@
+diff --git a/config/cmake/Modules/FindOpenJPEG2.cmake b/config/cmake/Modules/FindOpenJPEG2.cmake
+index c76bc44..c2617d7 100644
+--- a/config/cmake/Modules/FindOpenJPEG2.cmake
++++ b/config/cmake/Modules/FindOpenJPEG2.cmake
+@@ -14,6 +14,9 @@
+ # OPENJPEG2_DEFINITIONS - You should ADD_DEFINITONS(${OPENJPEG2_DEFINITIONS})
+ #                         before compiling code that includes OpenJPEG2 library files.
+ 
++set(OPENJPEG2_FOUND 0)
++return()
++
+ if( NOT VXL_FORCE_V3P_OPENJPEG2 )
+   if( NOT OPENJPEG2_FOUND )
+     include(CheckTypeSize)
+diff --git a/v3p/CMakeLists.txt b/v3p/CMakeLists.txt
+index 0a25e9f..be3004e 100644
+--- a/v3p/CMakeLists.txt
++++ b/v3p/CMakeLists.txt
+@@ -56,7 +56,8 @@ if(BUILD_CORE_IMAGING)
+ 
+   option( VXL_FORCE_V3P_OPENJPEG2 "Use V3P instead of any native OpenJPEG v2 library?" OFF)
+   mark_as_advanced( VXL_FORCE_V3P_OPENJPEG2 )
+-  add_subdirectory(openjpeg2)
++  # disable openjpeg2 to avoid conflicts with system copy
++  #add_subdirectory(openjpeg2)
+ 
+   add_subdirectory(rply)
+ 
