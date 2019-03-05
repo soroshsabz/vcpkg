@@ -16,37 +16,36 @@ if(NOT VCPKG_TARGET_ARCHITECTURE STREQUAL "x64")
     message(FATAL_ERROR "openblas can only be built for x64 currently")
 endif()
 
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/clapack-3.2.1-CMAKE)
 vcpkg_download_distfile(ARCHIVE
     URLS "http://www.netlib.org/clapack/clapack-3.2.1-CMAKE.tgz"
     FILENAME "clapack-3.2.1.tgz"
     SHA512 cf19c710291ddff3f6ead7d86bdfdeaebca21291d9df094bf0a8ef599546b007757fb2dbb19b56511bb53ef7456eac0c73973b9627bf4d02982c856124428b49
 )
-vcpkg_extract_source_archive(${ARCHIVE})
 
 # apply patch can not add file
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/lapack.def DESTINATION ${SOURCE_PATH}/SRC)
 
-vcpkg_apply_patches(
-    SOURCE_PATH ${SOURCE_PATH}
-    PATCHES "${CMAKE_CURRENT_LIST_DIR}/use-other-blas-and-install-include.patch"
-)
-
+#TODO change this
 if(VCPKG_CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    vcpkg_apply_patches(
-        SOURCE_PATH ${SOURCE_PATH}
-        PATCHES "${CMAKE_CURRENT_LIST_DIR}/fix-linux-build.patch"
+    vcpkg_extract_source_archive_ex(
+        OUT_SOURCE_PATH ${SOURCE_PATH}
+        ARCHIVE ${ARCHIVE}
+        REF 3.2.1
+        PATCHES
+        fix-linux-build.patch
+        use-other-blas-and-install-include.patch
+    )
+else()
+    vcpkg_extract_source_archive_ex(
+        OUT_SOURCE_PATH ${SOURCE_PATH}
+        ARCHIVE ${ARCHIVE}
+        REF 3.2.1
+        PATCHES use-other-blas-and-install-include.patch
     )
 endif()
 
-vcpkg_configure_cmake(
-    SOURCE_PATH ${SOURCE_PATH}
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/lapack.def DESTINATION ${SOURCE_PATH}/SRC)
 
-    # Disable this option if project cannot be built with Ninja
-    # OPTIONS -DUSE_THIS_IN_ALL_BUILDS=1 -DUSE_THIS_TOO=2
-    # OPTIONS_RELEASE -DOPTIMIZE=1
-    # OPTIONS_DEBUG -DDEBUGGABLE=1
-)
+vcpkg_configure_cmake(SOURCE_PATH ${SOURCE_PATH})
 
 vcpkg_install_cmake()
 
