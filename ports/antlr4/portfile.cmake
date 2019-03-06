@@ -34,6 +34,18 @@ else()
     set(RELEASE_CONFIG "Release DLL")
 endif()
 
+if (VCPKG_CRT_LINKAGE STREQUAL "static")
+    vcpkg_apply_patches(
+        SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src
+        PATCHES     ${CMAKE_CURRENT_LIST_DIR}/crt_mt.patch
+    )
+else()
+    vcpkg_apply_patches(
+        SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src
+        PATCHES     ${CMAKE_CURRENT_LIST_DIR}/crt_md.patch
+    )
+endif()
+
 vcpkg_build_msbuild(
     PROJECT_PATH ${SOURCE_PATH}/runtime/antlr4cpp-vs2015.vcxproj
     DEBUG_CONFIGURATION ${DEBUG_CONFIG}
