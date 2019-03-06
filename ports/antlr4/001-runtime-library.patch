@@ -6,7 +6,7 @@ index 85fa3da..540f031 100644
        <DisableSpecificWarnings>4251</DisableSpecificWarnings>
        <MultiProcessorCompilation>true</MultiProcessorCompilation>
        <MinimalRebuild>false</MinimalRebuild>
-+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
++      <RuntimeLibrary>$(RuntimeLibrary)</RuntimeLibrary>
      </ClCompile>
      <Link>
        <SubSystem>Windows</SubSystem>
@@ -14,7 +14,7 @@ index 85fa3da..540f031 100644
        <DisableSpecificWarnings>4251</DisableSpecificWarnings>
        <MultiProcessorCompilation>true</MultiProcessorCompilation>
        <MinimalRebuild>false</MinimalRebuild>
-+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
++      <RuntimeLibrary>$(RuntimeLibrary)</RuntimeLibrary>
      </ClCompile>
      <Link>
        <SubSystem>Windows</SubSystem>
@@ -22,7 +22,7 @@ index 85fa3da..540f031 100644
        </ForcedIncludeFiles>
        <DisableSpecificWarnings>4251</DisableSpecificWarnings>
        <MultiProcessorCompilation>true</MultiProcessorCompilation>
-+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
++      <RuntimeLibrary>$(RuntimeLibrary)</RuntimeLibrary>
      </ClCompile>
      <Link>
        <SubSystem>Windows</SubSystem>
@@ -30,7 +30,7 @@ index 85fa3da..540f031 100644
        </ForcedIncludeFiles>
        <DisableSpecificWarnings>4251</DisableSpecificWarnings>
        <MultiProcessorCompilation>true</MultiProcessorCompilation>
-+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
++      <RuntimeLibrary>$(RuntimeLibrary)</RuntimeLibrary>
      </ClCompile>
      <Link>
        <SubSystem>Windows</SubSystem>
