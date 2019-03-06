@@ -6,4 +6,4 @@ Default-Features: all
 
 Feature: all
 Description: enable all webp features
-Build-Depends: giflib, libjpeg-turbo, zlib, libpng, tiff, freeglut, sdl1
+Build-Depends: giflib, libjpeg-turbo, zlib, libpng, tiff, freeglut, sdl1 (windows)
