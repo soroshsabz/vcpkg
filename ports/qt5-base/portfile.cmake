@@ -153,7 +153,7 @@ if(EXISTS ${CURRENT_PACKAGES_DIR}/lib/qtmain.lib)
     # Create manual-link folders:
     file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/lib/manual-link)
     file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/debug/lib/manual-link)
-    #
+    
     # Either have users explicitly link against qtmain.lib, qtmaind.lib:
     file(COPY ${CURRENT_PACKAGES_DIR}/lib/qtmain.lib DESTINATION ${CURRENT_PACKAGES_DIR}/lib/manual-link)
     file(COPY ${CURRENT_PACKAGES_DIR}/lib/qtmain.prl DESTINATION ${CURRENT_PACKAGES_DIR}/lib/manual-link)
