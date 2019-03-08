@@ -6,7 +6,7 @@ vcpkg_download_distfile(ARCHIVE
     URLS "https://www.qcustomplot.com/release/${QCP_VERSION}/QCustomPlot.tar.gz"
     FILENAME "QCustomPlot-${QCP_VERSION}.tar.gz"
     SHA512 a15598718146ed3c6b5d38530a56661c16269e530fe0dedb71b4cb2722b5733a3b57689d668a75994b79c19c6e61dcc133dbcb9ed77b93a165f4ac826a5685b9
-)
+) 
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
@@ -17,7 +17,7 @@ vcpkg_download_distfile(ARCHIVE
     URLS "https://www.qcustomplot.com/release/${QCP_VERSION}/QCustomPlot-sharedlib.tar.gz"
     FILENAME "QCustomPlot-sharedlib-${QCP_VERSION}.tar.gz"
     SHA512 ce90540fca7226eac37746327e1939a9c7af38fc2595f385ed04d6d1f49560da08fb5fae15d1b9d22b6ba578583f70de8f89ef26796770d41bf599c1b15c535d
-)
+) 
 vcpkg_extract_source_archive(${ARCHIVE} ${SOURCE_PATH})
 
 vcpkg_configure_qmake(SOURCE_PATH
