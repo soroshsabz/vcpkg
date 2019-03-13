@@ -8,13 +8,14 @@ Feature: graphite2
 Build-Depends: graphite2
 Description: Graphite2 shaper support
 
-Feature: icu
-Build-Depends: icu
-Description: icu support for harfbuzz
+Feature: glib
+Build-Depends: glib
+Description: Glib Unicode callbacks support
 
 Feature: ucdn
 Description: Builtin (UCDN) Unicode callbacks support
 
-Feature: glib
-Build-Depends: glib
-Description: Glib Unicode callbacks support
+Feature: icu
+Build-Depends: icu
+Description: icu support for harfbuzz
+
