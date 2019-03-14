@@ -1,40 +1,18 @@
-project(TBB_static)
+project(tbb CXX)
 
-set(DUMMY ${PROJECT_SOURCE_DIR}/dummy.cpp)
-file(WRITE ${DUMMY} "#include <stdio.h>")
+file(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*)
+file(COPY ${SOURCES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/src)
 
-if(WIN32)
-    set(TBB_PROJECT_DIR ${PROJECT_SOURCE_DIR}/../build/vs2013/${BUILD_ARCH})
+include(${CMAKE_CURRENT_BINARY_DIR}/src/cmake/TBBBuild.cmake REQUIRED)
+tbb_build(TBB_ROOT ${CMAKE_CURRENT_BINARY_DIR}/src MAKE_ARGS extra_inc=big_iron.inc)
 
-    foreach(CURRENT_LIB tbb tbbmalloc tbbmalloc_proxy)
-        add_library(${CURRENT_LIB}${SUFFIX} STATIC ${DUMMY})
-
-        # Link it with *.obj
-        set_property(
-            TARGET ${CURRENT_LIB}${SUFFIX}
-            APPEND_STRING
-            PROPERTY
-                STATIC_LIBRARY_FLAGS
-                ${TBB_PROJECT_DIR}/${CURRENT_LIB}/${CONFIGURATION}/*${CMAKE_CXX_OUTPUT_EXTENSION})
-
-        install(TARGETS ${CURRENT_LIB}${SUFFIX} DESTINATION lib)
-    endforeach()
+set(SUBDIR ${CMAKE_CURRENT_BINARY_DIR}/tbb_cmake_build/tbb_cmake_build_subdir)
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    set(SUBDIR "${SUBDIR}_release")
 else()
-    if (CMAKE_BUILD_TYPE STREQUAL Debug)
-        set(TBB_PROJECT_DIR ${PROJECT_SOURCE_DIR}/../build/*_debug)
-    else()
-        set(TBB_PROJECT_DIR ${PROJECT_SOURCE_DIR}/../build/*_release)
-    endif()
-
-    add_library(tbb${SUFFIX} STATIC ${DUMMY})
-
-    # Link it with *.o
-    set_property(
-        TARGET tbb${SUFFIX}
-        APPEND_STRING
-        PROPERTY
-            STATIC_LIBRARY_FLAGS
-            ${TBB_PROJECT_DIR}/*${CMAKE_CXX_OUTPUT_EXTENSION})
-
-    install(TARGETS tbb${SUFFIX} DESTINATION lib)
+    set(SUBDIR "${SUBDIR}_debug")
 endif()
+
+file(GLOB OUTPUTS ${SUBDIR}/*.so.* ${SUBDIR}/*.so ${SUBDIR}/*.a ${SUBDIR}/*.dylib ${SUBDIR}/*.dylib.*)
+
+install(FILES ${OUTPUTS} DESTINATION lib)
