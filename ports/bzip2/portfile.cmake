@@ -11,6 +11,7 @@ vcpkg_extract_source_archive_ex(
     REF ${BZIP2_VERSION}
     PATCHES
         fix-import-export-macros.patch
+        avoid-liblibbz2.patch
 )
 
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt DESTINATION ${SOURCE_PATH})
