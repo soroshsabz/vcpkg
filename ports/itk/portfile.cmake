@@ -6,6 +6,7 @@ vcpkg_from_github(
     REF b2884129bf6db53cb102137d81e7176e893c5e5f
     SHA512 5d66d3c1a09b4f62b7bba6395a473c30c7e1d0f61d07eb96a6c2e35837409c0dd71d5a64e45772ad90c112c3997ad8acdfdbb60b1e01c9245b8bb1793ff8e134
     HEAD_REF master
+    PATCHES hdf5_config_mode_find_package.patch
 )
 
 if ("vtk" IN_LIST FEATURES)
@@ -44,15 +45,17 @@ vcpkg_configure_cmake(
         -DITK_USE_SYSTEM_PNG=ON
         -DITK_USE_SYSTEM_TIFF=ON
         -DITK_USE_SYSTEM_ZLIB=ON
+        # This should be turned on some day, however for now ITK does download specific versions so it shouldn't spontaneously break
         -DITK_FORBID_DOWNLOADS=OFF
+
+        -DITK_SKIP_PATH_LENGTH_CHECKS=ON
 
         # I havn't tried Python wrapping in vcpkg
         #-DITK_WRAP_PYTHON=ON
         #-DITK_PYTHON_VERSION=3
+        -DITK_USE_SYSTEM_HDF5=ON
 
-        -DITK_USE_SYSTEM_HDF5=ON # HDF5 was problematic in the past
-
-        -DModule_ITKVtkGlue=${ITKVtkGlue} # optional feature
+        -DModule_ITKVtkGlue=${ITKVtkGlue}
         -DModule_IOSTL=ON # example how to turn on a non-default module
         -DModule_MorphologicalContourInterpolation=ON # example how to turn on a remote module
         -DModule_RLEImage=ON # example how to turn on a remote module
