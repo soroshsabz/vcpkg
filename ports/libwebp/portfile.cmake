@@ -62,9 +62,9 @@ file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 
 #somehow the native CMAKE_EXECUTABLE_SUFFIX does not work, so here we emulate it
 if(CMAKE_HOST_WIN32)
-set(EXECUTABLE_SUFFIX ".exe")
+  set(EXECUTABLE_SUFFIX ".exe")
 else()
-set(EXECUTABLE_SUFFIX "")
+  set(EXECUTABLE_SUFFIX "")
 endif()
 
 if("all" IN_LIST FEATURES)
