@@ -10,12 +10,12 @@ vcpkg_extract_source_archive_ex(
     ARCHIVE ${ARCHIVE}
     REF 4.1
     PATCHES
-    create-lib-libraries.patch
-    detect-openssl.patch
-    configure_opencv.patch
-    fix_windowsinclude-in-ffmpegexe-1.patch
-    fix_windowsinclude-in-ffmpegexe-2.patch
-    fix_windowsinclude-in-ffmpegexe-3.patch
+        create-lib-libraries.patch
+        detect-openssl.patch
+        configure_opencv.patch
+        fix_windowsinclude-in-ffmpegexe-1.patch
+        fix_windowsinclude-in-ffmpegexe-2.patch
+        fix_windowsinclude-in-ffmpegexe-3.patch
 )
 if (${SOURCE_PATH} MATCHES " ")
     message(FATAL_ERROR "Error: ffmpeg will not build with spaces in the path. Please use a directory with no spaces")
