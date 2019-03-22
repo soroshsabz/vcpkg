@@ -72,7 +72,6 @@ function(vcpkg_acquire_msys PATH_TO_ROOT_OUT)
 
   if(NOT EXISTS "${TOOLPATH}/${STAMP}")
 
-    file(REMOVE ${PATH_TO_ROOT}/var/lib/pacman/db.lock)
     message(STATUS "Acquiring MSYS2...")
     vcpkg_download_distfile(ARCHIVE_PATH
         URLS ${URLS}
@@ -85,11 +84,13 @@ function(vcpkg_acquire_msys PATH_TO_ROOT_OUT)
     execute_process(
       COMMAND ${CMAKE_COMMAND} -E tar xzf ${ARCHIVE_PATH}
       WORKING_DIRECTORY ${TOOLPATH}
-    )
+      )
+    file(REMOVE ${PATH_TO_ROOT}/var/lib/pacman/db.lock)
     execute_process(
       COMMAND ${PATH_TO_ROOT}/usr/bin/bash.exe --noprofile --norc -c "PATH=/usr/bin;pacman-key --init;pacman-key --populate"
       WORKING_DIRECTORY ${TOOLPATH}
     )
+    file(REMOVE ${PATH_TO_ROOT}/var/lib/pacman/db.lock)
     execute_process(
       COMMAND ${PATH_TO_ROOT}/usr/bin/bash.exe --noprofile --norc -c "PATH=/usr/bin;pacman -Syu --noconfirm"
       WORKING_DIRECTORY ${TOOLPATH}
@@ -104,11 +105,14 @@ function(vcpkg_acquire_msys PATH_TO_ROOT_OUT)
 
     set(_ENV_ORIGINAL $ENV{PATH})
     set(ENV{PATH} ${PATH_TO_ROOT}/usr/bin)
+    file(REMOVE ${PATH_TO_ROOT}/var/lib/pacman/db.lock)
     vcpkg_execute_required_process(
       COMMAND ${PATH_TO_ROOT}/usr/bin/bash.exe --noprofile --norc -c "pacman -Sy --noconfirm --needed ${_am_PACKAGES}"
       WORKING_DIRECTORY ${TOOLPATH}
       LOGNAME msys-pacman-${TARGET_TRIPLET}
     )
+    file(REMOVE ${PATH_TO_ROOT}/var/lib/pacman/db.lock)
+
     set(ENV{PATH} "${_ENV_ORIGINAL}")
 
     message(STATUS "Acquiring MSYS Packages... OK")
