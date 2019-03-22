@@ -9,9 +9,9 @@ vcpkg_from_github(
 )
 
 if ("vtk" IN_LIST FEATURES)
-    set(ITKVtkGlue                     ON )
+    set(ITKVtkGlue ON)
 else()
-    set(ITKVtkGlue                     OFF )
+    set(ITKVtkGlue OFF)
 endif()
 
 # directory path length needs to be shorter than 50 characters
@@ -53,10 +53,9 @@ vcpkg_configure_cmake(
         # I havn't tried Python wrapping in vcpkg
         #-DITK_WRAP_PYTHON=ON
         #-DITK_PYTHON_VERSION=3
-
         -DITK_USE_SYSTEM_HDF5=ON
-        -DModule_ITKVtkGlue=${ITKVtkGlue}
 
+        -DModule_ITKVtkGlue=${ITKVtkGlue}
         -DModule_IOSTL=ON # example how to turn on a non-default module
         -DModule_MorphologicalContourInterpolation=ON # example how to turn on a remote module
         -DModule_RLEImage=ON # example how to turn on a remote module
