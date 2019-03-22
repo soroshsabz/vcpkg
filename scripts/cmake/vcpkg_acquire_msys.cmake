@@ -72,6 +72,7 @@ function(vcpkg_acquire_msys PATH_TO_ROOT_OUT)
 
   if(NOT EXISTS "${TOOLPATH}/${STAMP}")
 
+    file(REMOVE ${PATH_TO_ROOT}/var/lib/pacman/db.lock)
     message(STATUS "Acquiring MSYS2...")
     vcpkg_download_distfile(ARCHIVE_PATH
         URLS ${URLS}
@@ -79,7 +80,6 @@ function(vcpkg_acquire_msys PATH_TO_ROOT_OUT)
         SHA512 ${HASH}
     )
 
-    file(REMOVE ${PATH_TO_ROOT}/var/lib/pacman/db.lock)
     file(REMOVE_RECURSE ${TOOLPATH}/${TOOLSUBPATH})
     file(MAKE_DIRECTORY ${TOOLPATH})
     execute_process(
