@@ -101,6 +101,8 @@ function(vcpkg_acquire_msys PATH_TO_ROOT_OUT)
     message(STATUS "Acquiring MSYS Packages...")
     string(REPLACE ";" " " _am_PACKAGES "${_am_PACKAGES}")
 
+    file(REMOVE ${PATH_TO_ROOT}/var/lib/pacman/db.lock)
+
     set(_ENV_ORIGINAL $ENV{PATH})
     set(ENV{PATH} ${PATH_TO_ROOT}/usr/bin)
     vcpkg_execute_required_process(
