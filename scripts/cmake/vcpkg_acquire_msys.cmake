@@ -79,6 +79,7 @@ function(vcpkg_acquire_msys PATH_TO_ROOT_OUT)
         SHA512 ${HASH}
     )
 
+    file(REMOVE ${PATH_TO_ROOT}/var/lib/pacman/db.lock)
     file(REMOVE_RECURSE ${TOOLPATH}/${TOOLSUBPATH})
     file(MAKE_DIRECTORY ${TOOLPATH})
     execute_process(
@@ -100,8 +101,6 @@ function(vcpkg_acquire_msys PATH_TO_ROOT_OUT)
   if(_am_PACKAGES)
     message(STATUS "Acquiring MSYS Packages...")
     string(REPLACE ";" " " _am_PACKAGES "${_am_PACKAGES}")
-
-    file(REMOVE ${PATH_TO_ROOT}/var/lib/pacman/db.lock)
 
     set(_ENV_ORIGINAL $ENV{PATH})
     set(ENV{PATH} ${PATH_TO_ROOT}/usr/bin)
