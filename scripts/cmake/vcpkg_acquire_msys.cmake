@@ -85,12 +85,10 @@ function(vcpkg_acquire_msys PATH_TO_ROOT_OUT)
       COMMAND ${CMAKE_COMMAND} -E tar xzf ${ARCHIVE_PATH}
       WORKING_DIRECTORY ${TOOLPATH}
       )
-    file(REMOVE ${PATH_TO_ROOT}/var/lib/pacman/db.lock)
     execute_process(
       COMMAND ${PATH_TO_ROOT}/usr/bin/bash.exe --noprofile --norc -c "PATH=/usr/bin;pacman-key --init;pacman-key --populate"
       WORKING_DIRECTORY ${TOOLPATH}
     )
-    file(REMOVE ${PATH_TO_ROOT}/var/lib/pacman/db.lock)
     execute_process(
       COMMAND ${PATH_TO_ROOT}/usr/bin/bash.exe --noprofile --norc -c "PATH=/usr/bin;pacman -Syu --noconfirm"
       WORKING_DIRECTORY ${TOOLPATH}
@@ -111,7 +109,6 @@ function(vcpkg_acquire_msys PATH_TO_ROOT_OUT)
       WORKING_DIRECTORY ${TOOLPATH}
       LOGNAME msys-pacman-${TARGET_TRIPLET}
     )
-    file(REMOVE ${PATH_TO_ROOT}/var/lib/pacman/db.lock)
 
     set(ENV{PATH} "${_ENV_ORIGINAL}")
 
