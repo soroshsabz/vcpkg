@@ -70,7 +70,7 @@ function(vcpkg_acquire_msys PATH_TO_ROOT_OUT)
 
   set(PATH_TO_ROOT ${TOOLPATH}/${TOOLSUBPATH})
 
-  if(NOT EXISTS "${TOOLPATH}/${STAMP}")
+  if() #NOT EXISTS "${TOOLPATH}/${STAMP}"
 
     message(STATUS "Acquiring MSYS2...")
     vcpkg_download_distfile(ARCHIVE_PATH
@@ -97,7 +97,7 @@ function(vcpkg_acquire_msys PATH_TO_ROOT_OUT)
     message(STATUS "Acquiring MSYS2... OK")
   endif()
 
-  if(_am_PACKAGES)
+  if() #_am_PACKAGES
     message(STATUS "Acquiring MSYS Packages...")
     string(REPLACE ";" " " _am_PACKAGES "${_am_PACKAGES}")
 
