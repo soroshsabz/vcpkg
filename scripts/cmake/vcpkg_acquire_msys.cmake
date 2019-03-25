@@ -104,6 +104,10 @@ function(vcpkg_acquire_msys PATH_TO_ROOT_OUT)
     set(_ENV_ORIGINAL $ENV{PATH})
     set(ENV{PATH} ${PATH_TO_ROOT}/usr/bin)
     file(REMOVE ${PATH_TO_ROOT}/var/lib/pacman/db.lck)
+    find_file(DB_LOCK db.lck)
+    message(WARNING "HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE")
+    message("${DB_LOCK}")
+    message(WARNING "HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE")
     vcpkg_execute_required_process(
       COMMAND ${PATH_TO_ROOT}/usr/bin/bash.exe --noprofile --norc -c "pacman -Sy --noconfirm --needed ${_am_PACKAGES}"
       WORKING_DIRECTORY ${TOOLPATH}
