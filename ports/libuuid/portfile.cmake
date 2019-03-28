@@ -1,5 +1,9 @@
 include(vcpkg_common_functions)
 
+if (not VCPKG_CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    message(FATAL_ERROR "libuuid only supports Linux")
+endif()
+
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/libuuid-1.0.3)
 vcpkg_download_distfile(ARCHIVE
     URLS "http://sourceforge.net/projects/libuuid/files/libuuid-1.0.3.tar.gz"
