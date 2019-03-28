@@ -1,6 +1,6 @@
 include(vcpkg_common_functions)
 
-if (not VCPKG_CMAKE_SYSTEM_NAME STREQUAL "Linux")
+if (NOT VCPKG_CMAKE_SYSTEM_NAME STREQUAL "Linux")
     message(FATAL_ERROR "libuuid only supports Linux")
 endif()
 
